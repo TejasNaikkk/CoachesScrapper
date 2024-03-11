@@ -22,6 +22,30 @@ def getNum(soup):
             phone = phone_li.get_text(strip=True)
     return phone
 
+def genderHourlyRate(soup):
+    li_tags = soup.find_all('li')
+
+    # Dictionary to return gender and hourly rate
+    ghr = {}
+    # Loop through <li> tags to find gender and hourly rate
+    for li in li_tags:
+        text = li.get_text(strip=True)
+        if text.startswith('Gender'):
+            gender = text.split(':')[-1].strip()
+            g = {
+                'gender' : gender
+            }
+            ghr.update(g)
+        if text.startswith('Hourly Rate'):
+            hourly_rate = text.split(':')[-1].strip()
+            hr = {
+                'Hourly Rate' : hourly_rate
+            }
+            hr.update(hr)
+            ghr.update(hr)
+    return ghr
+
+
 def getDetails(user_url):
     url = base_site_url+user_url
     soup = souper(url=url)
@@ -38,7 +62,9 @@ def getDetails(user_url):
         'phone' : phone
     }
 
+    newDict = genderHourlyRate(soup)
 
+    detailsDictionary.update(newDict)
     return detailsDictionary
 
 
