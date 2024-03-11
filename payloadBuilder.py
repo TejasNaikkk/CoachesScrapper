@@ -74,10 +74,3 @@ def getDetails(user_url):
 
     detailsDictionary.update(newDict)
     return detailsDictionary
-
-
-details1 = getDetails("/users/john-bulman")
-
-
-
-print(details1)
