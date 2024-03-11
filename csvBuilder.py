@@ -16,7 +16,7 @@ csvFileName = f'{opFolder}test.csv'
 def makeCSV(payload):
     # Check if the CSV file exists, if not, write header
     try:
-        with open(csvFileName, 'x', newline='') as csvfile:
+        with open(csvFileName, 'x', newline='',encoding='utf-8') as csvfile:
             fieldnames = payload.keys()
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
@@ -25,7 +25,7 @@ def makeCSV(payload):
         pass
 
     # Write the payload to the CSV file
-    with open(csvFileName, 'a', newline='') as csvfile:
+    with open(csvFileName, 'a', newline='',encoding='utf-8') as csvfile:
         fieldnames = payload.keys()
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(payload)

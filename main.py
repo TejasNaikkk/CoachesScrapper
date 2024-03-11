@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from souper import souper
 from payloadBuilder import getDetails
 import config
-
+from csvBuilder import makeCSV
 base_url = config.url
 
 
@@ -25,5 +25,5 @@ for div in divs:
 
 
 for user in users:
-    details1 = getDetails(user)
-    print(details1)
+    payload = getDetails(user)
+    makeCSV(payload)
