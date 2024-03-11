@@ -45,21 +45,29 @@ def genderHourlyRate(soup):
             ghr.update(hr)
     return ghr
 
+def getCategories(soup):
+    categories = soup.find('div', class_='info').find('h4').text.strip()
+    return categories
 
 def getDetails(user_url):
     url = base_site_url+user_url
     soup = souper(url=url)
+    detailsDictionary = getCategories(soup)
+    
+    # gets name value
     name = soup.find('div', class_="coach-name clearfix").find('span').text
-
-    # calling getAddress function
+    # gets address value
     address = getAddress(soup)
-    #calling getNum function
+    # gets  phone value
     phone = getNum(soup)
+    # gets categories value
+    categories = getCategories(soup)
 
     detailsDictionary = {
         'name' : name,
         'address' : address,
-        'phone' : phone
+        'phone' : phone,
+        'categories' : categories
     }
 
     newDict = genderHourlyRate(soup)
@@ -68,9 +76,8 @@ def getDetails(user_url):
     return detailsDictionary
 
 
-details1 = getDetails("/users/marla-williams")
+details1 = getDetails("/users/john-bulman")
 
-details2 = getDetails("/users/liz-wolfe")
+
 
 print(details1)
-print(details2)
