@@ -3,7 +3,9 @@ from bs4 import BeautifulSoup
 from souper import souper
 from payloadBuilder import getDetails
 import config
-from csvBuilder import makeCSV
+import pymongo
+
+
 base_url = config.url
 
 
@@ -24,6 +26,17 @@ for div in divs:
     users.append(href)
 
 
+
+string = config.localMongoString
+client = pymongo.MongoClient(string)
+db = client["Scrapped"]
+collection = db["Coaches1"]
+# Function to send payload dictionary to mongo
+def insertDataToMongo(payload, collection):
+    collection.insert_one(payload)
+
 for user in users:
     payload = getDetails(user)
-    makeCSV(payload)
+    print(payload)
+    insertDataToMongo(payload,collection)
+client.close()
