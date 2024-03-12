@@ -28,21 +28,24 @@ def genderHourlyRate(soup):
     # Dictionary to return gender and hourly rate
     ghr = {}
     # Loop through <li> tags to find gender and hourly rate
+    g = {'gender' : 'Not Specified'}
+    hr = {'Hourly Rate' : 'Not Specified'}
     for li in li_tags:
         text = li.get_text(strip=True)
+        if text.startswith('Hourly Rate'):
+            hourly_rate = text.split(':')[-1].strip()
+            hr = {
+                'Hourly Rate' : hourly_rate
+            }
+            ghr.update(hr)
         if text.startswith('Gender'):
             gender = text.split(':')[-1].strip()
             g = {
                 'gender' : gender
             }
             ghr.update(g)
-        if text.startswith('Hourly Rate'):
-            hourly_rate = text.split(':')[-1].strip()
-            hr = {
-                'Hourly Rate' : hourly_rate
-            }
-            hr.update(hr)
-            ghr.update(hr)
+    ghr.update(hr)
+    ghr.update(g)
     return ghr
 
 def getCategories(soup):
