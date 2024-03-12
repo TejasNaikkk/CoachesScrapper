@@ -9,3 +9,9 @@ The website shall remain nameless to safeguard their data.
 **Updates on 11-03-2024 22:34**
 * Returns name, address, phone, gender,hourly_rate from the coach's profile
 * Trying to get the Lat Long data of the office/workplace
+
+
+**Updates on 11-03-2024 23:44**
+* The data on the later pages was found to be garbage/non worthy of effort
+* Repo reduced to proof of concept for further scrapping repos
+* Low Prioriity
